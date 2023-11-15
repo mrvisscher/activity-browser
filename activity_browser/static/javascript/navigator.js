@@ -96,9 +96,10 @@ d3.demo.canvas = function() {
         //changed location of MiniMap to under the graph for better layout with very wide graphs
         var svgWidth = (width  + (wrapperBorder*2) + minimapPadding*2);
         var svgHeight = (height + (wrapperBorder*2) + minimapPadding*2 + (height*minimapScale));
+
         var svg = selection.append("svg")
             .attr("class", "svg canvas")
-            .attr("width", svgWidth)
+            .attr("width", "100%")
             .attr("height", svgHeight)
             .attr("shape-rendering", "auto");
 
@@ -108,16 +109,16 @@ d3.demo.canvas = function() {
             .attr("class", "wrapper clipPath")
             .append("rect")
             .attr("class", "background")
-            .attr("width", width)
+            .attr("width", "100%")
             .attr("height", height);
         svgDefs.append("clipPath")
             .attr("id", "minimapClipPath_qwpyza")
             .attr("class", "minimap clipPath")
-            .attr("width", width)
+            .attr("width", "100%")
             .attr("height", height)
             .append("rect")
             .attr("class", "background")
-            .attr("width", width)
+            .attr("width", "100%")
             .attr("height", height);
 
         var filter = svgDefs.append("svg:filter")  // frame of the mini-map
@@ -168,7 +169,7 @@ d3.demo.canvas = function() {
             .attr("transform", "translate(0, " + minimapPadding + ")");
         outerWrapper.append("rect")
             .attr("class", "background")
-            .attr("width", width + wrapperBorder*2)
+            .attr("width", "100%")
             .attr("height", height + wrapperBorder*2);
 
         var innerWrapper = outerWrapper.append("g")
@@ -178,18 +179,18 @@ d3.demo.canvas = function() {
 
         innerWrapper.append("rect")
             .attr("class", "background")
-            .attr("width", width)
+            .attr("width", "100%")
             .attr("height", height);
 
         panCanvas = innerWrapper.append("g")
             .attr("class", "panCanvas")
-            .attr("width", width)
+            .attr("width", "100%")
             .attr("height", height)
             .attr("transform", "translate(0,0)");
 
         panCanvas.append("rect")
             .attr("class", "background")
-            .attr("width", width)
+            .attr("width", "100%")
             .attr("height", height);
 
         var zoom = d3.zoom()
@@ -255,29 +256,29 @@ d3.demo.canvas = function() {
             updateDimensions(); //added call to update window sizes
             svgDefs
                 .select(".clipPath .background")
-                .attr("width", width)
+                .attr("width", "100%")
                 .attr("height", height);
             //changed location of MiniMap to under the graph for better layout with very wide graphs
             svg
-                .attr("width",  width  + (wrapperBorder*2) )
+                .attr("width",  "100%" )
                 .attr("height", height + (wrapperBorder*2) + minimapPadding*2 + (width*minimapScale));
 
             outerWrapper
                 .select(".background")
-                .attr("width", width + wrapperBorder*2)
+                .attr("width", "100%")
                 .attr("height", height + wrapperBorder*2);
 
             innerWrapper
                 .attr("transform", "translate(" + (wrapperBorder) + "," + (wrapperBorder) + ")")
                 .select(".background")
-                .attr("width", width)
+                .attr("width", "100%")
                 .attr("height", height);
 
             panCanvas
-                .attr("width", width)
+                .attr("width", "100%")
                 .attr("height", height)
                 .select(".background")
-                .attr("width", width)
+                .attr("width", "100%")
                 .attr("height", height);
 
             minimap
@@ -669,6 +670,7 @@ const cartographer = function() {
 
 //instantiation of canvas container+reset button
 var canvas = d3.demo.canvas();
+console.log(canvas)
 d3.select("#canvasqPWKOg").call(canvas);
 
 d3.select("#resetButtonqPWKOg").on("click", function() {
