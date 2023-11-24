@@ -11,7 +11,9 @@ from ..ui.menu_bar import MenuBar
 from ..ui.statusbar import Statusbar
 from ..ui.style import header
 from ..ui.utils import StdRedirector
-from .panels import LeftPanel, RightPanel, BottomPanel
+from .panels import LeftPanel, RightPanel, BottomPanel, Database_Manager_Panel 
+from .tabs.project_manager import ProjectsWidget
+from .tabs import MethodsTab
 from ..signals import signals
 
 
@@ -27,65 +29,27 @@ class MainWindow(QtWidgets.QMainWindow):
         # Window title
         self.setWindowTitle("Activity Browser")
 
-        # Background Color
-        # self.setAutoFillBackground(True)
-        # p = self.palette()
-        # p.setColor(self.backgroundRole(), QtGui.QColor(148, 143, 143, 127))
-        # self.setPalette(p)
-
         # Small icon in main window titlebar
         self.icon = qicons.ab
         self.setWindowIcon(self.icon)
 
-        # Layout
-        # The top level element is `central_widget`.
-        # Inside is a vertical layout `vertical_container`.
-        # Inside the vertical layout is a horizontal layout `main_horizontal_box` with two elements and a
-        # The enclosing element is `main_horizontal_box`, which contains the
-        # left and right panels `left_panel` and `right_panel`.
-        # Left (0) and right (1) panels have a default screen division, set by the setStretchfactor() commands
-        # the last argument is the proportion of screen it takes up from total (so 1 and 3 gives 1/4 and 3/4)
+        # setting-up dockwidgets
+        self.projects=QtWidgets.QDockWidget('Projects')
+        self.projects.setWidget(ProjectsWidget())
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.projects)
 
-        self.main_horizontal_box = QtWidgets.QHBoxLayout()
+        self.projects=QtWidgets.QDockWidget('Databases')
+        self.projects.setWidget(Database_Manager_Panel(self))
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.projects)
 
-        self.left_panel = LeftPanel(self)
-        self.right_panel = RightPanel(self)
-        self.bottom_panel = BottomPanel(self)
+        self.impacts=QtWidgets.QDockWidget('Impact Categories')
+        self.impacts.setWidget(MethodsTab(self.impacts))
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.impacts)
 
-        #Sets the minimum width for the right panel so scaling on Mac Screens doesnt go out of bounds
-        self.right_panel.setMinimumWidth(100)
-        self.bottom_panel.setMinimumHeight(100)
+        self.setTabPosition(QtCore.Qt.AllDockWidgetAreas, QtWidgets.QTabWidget.North)
+        self.setDockOptions(self.GroupedDragging | self.AllowTabbedDocks )
 
-        self.splitter_horizontal = QtWidgets.QSplitter(QtCore.Qt.Horizontal)
-        self.splitter_horizontal.addWidget(self.left_panel)
-        self.splitter_horizontal.addWidget(self.right_panel)
-        self.splitter_horizontal.setStretchFactor(0, 1)
-        self.splitter_horizontal.setStretchFactor(1, 3)
-        self.main_horizontal_box.addWidget(self.splitter_horizontal)
-        self.main_window = QtWidgets.QWidget()
-        self.main_window.setLayout(self.main_horizontal_box)
 
-        self.vertical_container = QtWidgets.QVBoxLayout()
-        self.splitter_vertical = QtWidgets.QSplitter(QtCore.Qt.Vertical)
-        self.splitter_vertical.addWidget(self.main_window)
-        self.splitter_vertical.addWidget(self.bottom_panel)
-        self.vertical_container.addWidget(self.splitter_vertical)
-
-        self.main_widget = QtWidgets.QWidget()
-        self.main_widget.icon = qicons.main_window
-        self.main_widget.name = "&Main Window"
-        self.main_widget.setLayout(self.vertical_container)
-
-        """
-        # Debug/working... stack
-        self.log = QtWidgets.QTextEdit(self)
-        sys.stdout = StdRedirector(self.log, sys.stdout, None)
-        sys.stderr = StdRedirector(self.log, sys.stderr, "blue")
-
-        working_layout = QtWidgets.QVBoxLayout()
-        working_layout.addWidget(header("Program output:"))
-        working_layout.addWidget(self.log)
-        """
         # Debug/... window stack
         self.debug = QtWidgets.QWidget()
         self.debug.icon = qicons.debug
@@ -95,7 +59,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.stacked.addWidget(self.debug)
         # End of Debug/... window stack
 
-        self.setCentralWidget(self.main_widget)
+        self.setCentralWidget(RightPanel(self))
 
         # Layout: extra items outside main layout
         self.menu_bar = MenuBar(self)
