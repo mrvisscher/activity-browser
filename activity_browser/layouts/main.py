@@ -38,9 +38,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.projects.setWidget(ProjectsWidget())
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.projects)
 
-        self.projects=QtWidgets.QDockWidget('Databases')
-        self.projects.setWidget(Database_Manager_Panel(self))
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.projects)
+        self.databases=QtWidgets.QDockWidget('Databases')
+        self.databases.setWidget(Database_Manager_Panel(self))
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.databases)
 
         self.impacts=QtWidgets.QDockWidget('Impact Categories')
         self.impacts.setWidget(MethodsTab(self.impacts))
@@ -64,6 +64,12 @@ class MainWindow(QtWidgets.QMainWindow):
         # Layout: extra items outside main layout
         self.menu_bar = MenuBar(self)
         self.setMenuBar(self.menu_bar)
+
+        self.menu_bar.view_menu.addSeparator()
+        self.menu_bar.view_menu.addAction(self.projects.toggleViewAction())
+        self.menu_bar.view_menu.addAction(self.databases.toggleViewAction())
+        self.menu_bar.view_menu.addAction(self.impacts.toggleViewAction())
+
         self.status_bar = Statusbar(self)
         self.setStatusBar(self.status_bar)
 
