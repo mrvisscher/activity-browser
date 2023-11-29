@@ -5,6 +5,7 @@ import sys
 import shutil
 
 from PySide2 import QtCore, QtGui, QtWidgets
+from bw2data import projects
 
 from ..ui.icons import qicons
 from ..ui.menu_bar import MenuBar
@@ -115,10 +116,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.shortcut_debug.activated.connect(self.toggle_debug_window)
         signals.restore_cursor.connect(self.restore_user_control)
 
+        signals.project_selected.connect(self.update_titlebar)
+
     def toggle_debug_window(self):
         """Toggle the bottom debug window"""
         self.debug_window = not self.debug_window
         self.bottom_panel.setVisible(self.debug_window)
+
+    def update_titlebar(self):
+        """
+        Update the titlebar when a new project is selected. Titlebar should show:
+        'Activity Browser - current project'
+        """
+        self.setWindowTitle(f"Activity Browser - {projects.current}")
 
     def add_tab_to_panel(self, obj, label, side):
         panel = self.left_panel if side == 'left' else self.right_panel
