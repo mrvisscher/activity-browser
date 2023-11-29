@@ -18,28 +18,17 @@ class MenuBar(QtWidgets.QMenuBar):
         self.tools_menu = QtWidgets.QMenu('&Tools', self.window)
         self.help_menu = QtWidgets.QMenu('&Help', self.window)
 
-        self.update_biosphere_action = QtWidgets.QAction(
-            window.style().standardIcon(QtWidgets.QStyle.SP_BrowserReload),
-            "&Update biosphere...", None
-        )
-        self.export_db_action = QtWidgets.QAction(
-            self.window.style().standardIcon(QtWidgets.QStyle.SP_DriveHDIcon),
-            "&Export database...", None
-        )
-        self.import_db_action = QtWidgets.QAction(
-            qicons.import_db, '&Import database...', None
-        )
         self.manage_plugins_action = QtWidgets.QAction(
             qicons.plugin, '&Plugins...', None
         )
 
-        self.addMenu(self.file_menu)
+        self.addMenu(FileMenu(self))
         self.addMenu(self.view_menu)
         self.addMenu(self.windows_menu)
         self.addMenu(self.tools_menu)
         self.addMenu(self.help_menu)
 
-        self.setup_file_menu()
+        #self.setup_file_menu()
         self.setup_view_menu()
         self.update_windows_menu()
         self.setup_tools_menu()
@@ -50,9 +39,9 @@ class MenuBar(QtWidgets.QMenuBar):
         signals.update_windows.connect(self.update_windows_menu)
         signals.project_selected.connect(self.biosphere_exists)
         signals.databases_changed.connect(self.biosphere_exists)
-        self.update_biosphere_action.triggered.connect(signals.update_biosphere.emit)
-        self.export_db_action.triggered.connect(signals.export_database.emit)
-        self.import_db_action.triggered.connect(signals.import_database.emit)
+        #self.update_biosphere_action.triggered.connect(signals.update_biosphere.emit)
+        #self.export_db_action.triggered.connect(signals.export_database.emit)
+        #self.import_db_action.triggered.connect(signals.import_database.emit)
         self.manage_plugins_action.triggered.connect(signals.manage_plugins.emit)
 
     def setup_file_menu(self) -> None:
@@ -140,5 +129,83 @@ For license information please see the copyright on <a href="https://github.com/
         """ Test if the default biosphere exists as a database in the project
         """
         exists = True if bw.config.biosphere in bw.databases else False
-        self.update_biosphere_action.setEnabled(exists)
-        self.import_db_action.setEnabled(exists)
+        #self.update_biosphere_action.setEnabled(exists)
+        #self.import_db_action.setEnabled(exists)
+
+class FileMenu(QtWidgets.QMenu):
+    project_actions = []
+
+    def __init__(self, parent):
+        super().__init__('&File', parent)
+
+        self.addAction(
+            parent.window.style().standardIcon(QtWidgets.QStyle.SP_BrowserReload), 
+            "&Update biosphere...", 
+            lambda: print("hi")
+        )
+        self.addAction(
+            parent.window.style().standardIcon(QtWidgets.QStyle.SP_DriveHDIcon),
+            "&Export database...", 
+            signals.export_database.emit
+        )
+        self.addAction(
+            qicons.import_db, 
+            '&Import database...', 
+            signals.import_database.emit
+        )
+        self.addAction(
+            qicons.settings, 
+            '&Settings...', 
+            signals.edit_settings.emit
+        )
+        self.addSeparator()        
+        self.addAction(
+            qicons.add,
+            "&New Brightway project...", 
+            signals.new_project.emit
+        )
+        self.addAction(
+            qicons.copy, 
+            '&Copy current project...', 
+            signals.copy_project.emit
+        )
+        self.addAction(
+            qicons.delete, 
+            '&Remove current project...', 
+            signals.delete_project.emit
+        )
+        self.addSeparator()
+
+        self.project_section = self.addSection("Brightway Projects")
+        self.sync_projects()
+
+        self.connect_signals()
+    
+    def connect_signals(self):
+        signals.project_selected.connect(self.sync_projects)
+        signals.projects_changed.connect(self.sync_projects)
+    
+    def sync_projects(self):
+        self.clear_projects()
+        self.project_names = sorted([project.name for project in bw.projects])
+        for name in self.project_names:
+            action = QtWidgets.QAction(name, self)
+            action.setCheckable(True)
+            action.triggered.connect(lambda n=name, *args: self.project_selected(n))
+
+            if name == bw.projects.current:
+                action.setChecked(True)
+            else:
+                action.setChecked(False)
+
+            self.project_actions.append(action)
+        
+        self.insertActions(self.project_section, self.project_actions)
+    
+    def clear_projects(self):
+        for action in self.project_actions:
+            self.removeAction(action)
+        self.project_actions.clear()
+    
+    def project_selected(self, project_name: str):
+        signals.change_project.emit(project_name)
