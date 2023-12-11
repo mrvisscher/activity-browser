@@ -315,7 +315,7 @@ class BaseTreeModel(QAbstractItemModel):
         if not index.isValid():
             return None
 
-        if role == Qt.DisplayRole:
+        if role == Qt.DisplayRole or role == Qt.EditRole:
             item = index.internalPointer()
             return item.data(index.column())
 

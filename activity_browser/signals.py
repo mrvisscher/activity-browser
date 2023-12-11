@@ -106,6 +106,8 @@ class Signals(QObject):
     new_method = Signal()  # A new method was added
     method_deleted = Signal()  # A method was deleted
     copy_method = Signal(tuple, str)  # Copy this method | tuple of impact category, level of tree OR the proxy
+    true_copy_method = Signal(tuple, list)
+    paste_method = Signal(tuple, list)
     delete_method = Signal(tuple, str)  # Delete this method | tuple of impact category, level of tree OR the proxy
     edit_method_cf = Signal(tuple, tuple)  # Edit this CF for this method | tuple of characterization factor, tuple of method
     remove_cf_uncertainties = Signal(list, tuple)  # Remove uncertainty data for these CFs | list of CFs to remove info from, tuple of method

@@ -225,6 +225,8 @@ class ImpactCategoryController(QObject):
         self.window = parent
 
         signals.copy_method.connect(self.copy_method)
+        signals.true_copy_method.connect(self.true_copy_method)
+        signals.paste_method.connect(self.paste_method)
         signals.delete_method.connect(self.delete_method)
         signals.edit_method_cf.connect(self.modify_method_with_cf)
         signals.remove_cf_uncertainties.connect(self.remove_uncertainty)
@@ -254,6 +256,53 @@ class ImpactCategoryController(QObject):
                 mthd.copy(new_method)
                 log.info("Copied method {} into {}".format(str(mthd.name), str(new_method)))
             signals.new_method.emit()
+    
+    def true_copy_method(self, method: tuple, level: list = None) -> None:
+        """Calls copy depending on the level, if level is 'leaf', or None,
+        then a single method is copied. Otherwise sets are used to identify
+        the appropriate methods"""
+        if level[0] is not None and level[0] != 'leaf':
+            methods = [bw.Method(mthd) for mthd in bw.methods if set(method).issubset(mthd)]
+        else:
+            methods = [bw.Method(method)]
+        
+        self.copied_methods = methods
+        self.copied_level = level
+        
+        
+        """
+        if dialog.exec_() == TupleNameDialog.Accepted:
+            new_name = dialog.result_tuple
+            for mthd in methods:
+                new_method = new_name + mthd.name[len(new_name):]
+                if new_method in bw.methods:
+                    warn = "Impact Category with name '{}' already exists!".format(new_method)
+                    QtWidgets.QMessageBox.warning(self.window, "Copy failed", warn)
+                    return
+                mthd.copy(new_method)
+                log.info("Copied method {} into {}".format(str(mthd.name), str(new_method)))
+            signals.new_method.emit()
+        """
+    
+    def paste_method(self, method: tuple, level: list = None) -> None:
+        print(self.copied_methods)
+        print(self.copied_level[1])
+        if self.copied_level[0] == "root":
+            length = 0
+        else:
+            length = len(self.copied_level[1])-1
+
+        for mthd in self.copied_methods:
+            new_method = method + mthd.name[length:]
+            print(mthd.name[length])
+            if new_method in bw.methods:
+                new_method = method + (mthd.name[length] + " - copy",) + mthd.name[length + 1:]
+                #warn = "Impact Category with name '{}' already exists!".format(new_method)
+                #QtWidgets.QMessageBox.warning(self.window, "Copy failed", warn)
+                #return
+            mthd.copy(new_method)
+        signals.new_method.emit()
+
 
     @Slot(tuple, name="deleteMethod")
     def delete_method(self, method_: tuple, level:str = None) -> None:

@@ -96,6 +96,7 @@ class MethodsTree(ABDictTreeView):
         # set drag ability
         self.setDragEnabled(True)
         self.setDragDropMode(ABDictTreeView.DragOnly)
+        self.setEditTriggers(self.NoEditTriggers)
         # set model
         self.model = MethodsTreeModel(self)
         self.setModel(self.model)
@@ -169,6 +170,15 @@ class MethodsTree(ABDictTreeView):
         menu.addAction(qicons.delete, "Delete Impact Category",
                        lambda: self.delete_method()
                        )
+        menu.addAction(qicons.copy, "Copy Impact Category",
+                lambda: self.true_copy_method()
+                )
+        menu.addAction(qicons.copy, "Paste Impact Category",
+                lambda: self.paste_method()
+                )
+        menu.addAction(qicons.copy, "Rename",
+                lambda: self.rename_method()
+                )
 
         menu.exec_(event.globalPos())
 
@@ -220,6 +230,16 @@ class MethodsTree(ABDictTreeView):
     def copy_method(self) -> None:
         """Call copy on the (first) selected method and present rename dialog."""
         self.model.copy_method(self.tree_level())
+
+    def true_copy_method(self) -> None:
+        self.model.true_copy_method(self.tree_level())
+    
+    def paste_method(self) -> None:
+        self.model.paste_method(self.tree_level())
+    
+    def rename_method(self) -> None:
+        self.edit(self.selectedIndexes()[0])
+        self.model.rename_method(self.selectedIndexes())
 
     @Slot(name="deleteMethod")
     def delete_method(self) -> None:

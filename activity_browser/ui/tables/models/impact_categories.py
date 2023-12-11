@@ -119,8 +119,8 @@ class MethodsTreeModel(BaseTreeModel):
         # signals.new_method.connect(self.filter_on_method) # TODO: Reload interface
 
     def flags(self, index):
-        res = super().flags(index) | Qt.ItemIsDragEnabled
-        return res
+        res = super().flags(index) | Qt.ItemIsDragEnabled | Qt.ItemIsEditable
+        return res       
 
     def setup_and_sync(self) -> None:
         self.setup_model_data()
@@ -266,6 +266,22 @@ class MethodsTreeModel(BaseTreeModel):
     def copy_method(self, level: tuple) -> None:
         method = self.get_method(level)
         signals.copy_method.emit(method, level[0])
+    
+    def true_copy_method(self, level: tuple) -> None:
+        method = self.get_method(level)
+        signals.true_copy_method.emit(method, level)
+    
+    def paste_method(self, level: tuple) -> None:
+        method = self.get_method(level)
+        signals.paste_method.emit(method, level)
+
+    def rename_method(self, selected_indexes):
+        print(selected_indexes)
+        print(self.itemData(selected_indexes[0]))
+    
+    def setData(self, index, value, role):
+        if role == Qt.EditRole:
+            return True
 
     @Slot(QModelIndex, name="deleteMethod")
     def delete_method(self, level: tuple) -> None:
