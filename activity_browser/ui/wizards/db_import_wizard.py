@@ -637,13 +637,14 @@ class ImportPage(QtWidgets.QWizardPage):
 
         Customized for ABExcelImporter problems
         """
-        self.main_worker_thread.exit(1)
+        #self.main_worker_thread.exit(1)
 
         # Iterate through the missing databases, asking user input.
         options = [(db, bw.databases.list) for db in missing]
         linker = DatabaseLinkingDialog.relink_excel(options, self)
         if linker.exec_() == DatabaseLinkingDialog.Accepted:
-            self.relink_data = linker.links
+            #self.relink_data = linker.links
+            import_signals.excel_relink_done.emit(linker.links)
         else:
             error = (
                 "Unlinked exchanges",
@@ -655,7 +656,7 @@ class ImportPage(QtWidgets.QWizardPage):
             )
             return
         # Restart the page
-        self.initializePage()
+        #self.initializePage()
 
     @Slot(str, name="handleUnzipFailed")
     def report_failed_unarchive(self, file: str) -> None:
@@ -685,6 +686,12 @@ class MainWorkerThread(QtCore.QThread):
         self.use_forwast = None
         self.use_local = None
         self.relink = {}
+
+        self.signal_return = (False, None)
+        import_signals.excel_relink_done.connect(self.return_signal)
+
+    def return_signal(self, *args):
+        self.signal_return = (True, [*args])
 
     def update(self, db_name: str, archive_path=None, datasets_path=None,
                use_forwast=False, use_local=False, relink=None) -> None:
@@ -820,9 +827,18 @@ class MainWorkerThread(QtCore.QThread):
             import_signals.db_progress.emit(0, 0)
             archive = Path(self.archive_path)
             if archive.suffix in {".xlsx", ".xls"}:
-                result = ABExcelImporter.simple_automated_import(
-                    self.archive_path, self.db_name, self.relink
-                )
+                result = None
+                for import_result in ABExcelImporter.advanced_automated_import(self.archive_path, self.db_name, self.relink):
+                    if import_result.identifier == "MISSING":
+                        import_signals.links_required.emit(["implement this"], import_result.payload)
+                        while not self.signal_return[0]: self.yieldCurrentThread()
+                        import_result.set_response(self.signal_return[1])
+                        self.signal_return = (False, None)
+                    
+                    if import_result.identifier == "FINISHED":
+                        result = import_result.payload
+                        print(result)
+                        break
                 signals.parameters_changed.emit()
             else:
                 result = ABPackage.import_file(self.archive_path, relink=self.relink, rename=self.db_name)
@@ -1206,6 +1222,7 @@ class ImportSignals(QtCore.QObject):
     missing_dbs = Signal(object)
     links_required = Signal(object, object)
 
+    excel_relink_done = Signal(object)
 
 import_signals = ImportSignals()
 

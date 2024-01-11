@@ -26,6 +26,14 @@ from .strategies import (
     csv_rewrite_product_key,
 )
 
+class Result:
+    def __init__(self, identifier: str, payload):
+        self.identifier = identifier
+        self.payload = payload
+    
+    def set_response(self, response):
+        self.response = response
+
 
 class ABExcelImporter(ExcelImporter):
     """Customized Excel importer for the AB."""
@@ -109,6 +117,111 @@ class ABExcelImporter(ExcelImporter):
         if has_params:
             bw.parameters.recalculate()
         return [db]
+
+    @classmethod
+    def advanced_automated_import(cls, filepath, db_name: str, relink: dict = None):
+        obj = cls(filepath)
+
+        first_phase_strats = [
+            functools.partial(
+                alter_database_name,
+                old=obj.db_name,
+                new=db_name
+            ),
+            csv_restore_tuples,
+            csv_restore_booleans,
+            csv_numerize,
+            csv_drop_unknown,
+            csv_add_missing_exchanges_section,
+            csv_rewrite_product_key,
+            normalize_units,
+            normalize_biosphere_categories,
+            normalize_biosphere_names,
+            strip_biosphere_exc_locations,
+            set_code_by_activity_hash,
+        ]
+        second_phase_strats = [
+            assign_only_product_as_production,
+            link_technosphere_by_activity_hash,
+            drop_falsey_uncertainty_fields_but_keep_zeros,
+            convert_uncertainty_types_to_integers,
+            hash_parameter_group,
+            convert_activity_parameters_to_list,
+        ]
+        has_params = any([
+            obj.project_parameters, obj.database_parameters,
+            any("parameters" in ds for ds in obj.data)
+        ])
+
+        obj.apply_strategies(first_phase_strats)
+        obj.db_name = db_name
+
+        print(obj.statistics())
+
+        # recover exchanges that reference external databases (databases that are not the one we are now importing)
+        # group them by database name and keep references to the obj.data dict intact. We want changes to trickle 
+        # down to that dict later instead of having to update them through an interator again.
+        external_databases = {}
+        for activity in obj.data:
+            for exchange in activity.get("exchanges",[]):
+                # get the database name of the exchange
+                db = exchange.get("database","")
+
+                # return the exchange it isn't external
+                if db == db_name: continue
+
+                # if already in our dict, append
+                if db in external_databases.keys():
+                    external_databases[db]["exchanges"].append(exchange)
+                # otherwise create new entry, dict structure based upon bw2io strategies
+                else:
+                    external_databases[db] = {"exchanges":[exchange],"type":exchange.get("type","")}
+        
+        print([x for x in obj.unlinked])
+
+        # if any of the external databases are not in our current databases, we need to relink
+        missing = [ db for db in external_databases.keys() if db not in bw.databases]       
+        if missing:
+            # yield Result.identifier = MISSING to the worker, indicating we need user interaction
+            # yield pauses further execution till the worker indicates it has provided a response
+            user_links_result = Result("MISSING", missing)
+            yield user_links_result
+
+            #get the response from the Result and apply the change to our external databases
+            user_links = user_links_result.response[0]
+            for link in user_links:
+                external_databases[user_links[link]] = external_databases.pop(link)
+        
+        # connect the exchanges to their counterparts in the external databases, this is done through
+        # hashing those entire databases, which is why it takes quite a lot of time.
+        # TODO: indicate progress to the user e.g. what database we're hashing now.
+        for database_name in external_databases:
+            database = external_databases[database_name]
+            # biosphere db's require special fields, otherwise the exchange may mismatch because of location
+            if database["type"] == "biosphere":
+                link_iterable_by_fields(
+                    [database], 
+                    other=bw.Database(bw.config.biosphere), 
+                    kind='biosphere',
+                    fields=("name", "categories", "unit", "reference product"))
+            else:
+                link_technosphere_by_activity_hash([database], database_name)
+        
+        # Raise a LinkingFailed exception if there are any external exchanges left
+        true_unlinked = [exc for ds in obj.data for exc in ds.get("exchanges", []) if not exc.get("input")]
+        if any(xx:=[exchange for exchange in true_unlinked if exchange["database"] != obj.db_name]):
+            databases = {exchange.get("database", "") for exchange in xx}
+            raise LinkingFailed(xx, databases)
+
+        # apply the second phase of strategies, this is where we'll link internally
+        obj.apply_strategies(second_phase_strats)
+
+        if obj.project_parameters:
+            obj.write_project_parameters(delete_existing=False)
+        db = obj.write_database(delete_existing=True, activate_parameters=True)
+        if has_params:
+            bw.parameters.recalculate()
+        yield Result("FINISHED", [db])
 
 class ABPackage(bw.BW2Package):
     """ Inherits from brightway2 `BW2Package` and handles importing BW2Packages.
