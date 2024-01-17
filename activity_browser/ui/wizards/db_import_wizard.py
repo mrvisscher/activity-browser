@@ -828,17 +828,7 @@ class MainWorkerThread(QtCore.QThread):
             archive = Path(self.archive_path)
             if archive.suffix in {".xlsx", ".xls"}:
                 result = None
-                for import_result in ABExcelImporter.advanced_automated_import(self.archive_path, self.db_name, self.relink):
-                    if import_result.identifier == "MISSING":
-                        import_signals.links_required.emit(["implement this"], import_result.payload)
-                        while not self.signal_return[0]: self.yieldCurrentThread()
-                        import_result.set_response(self.signal_return[1])
-                        self.signal_return = (False, None)
-                    
-                    if import_result.identifier == "FINISHED":
-                        result = import_result.payload
-                        print(result)
-                        break
+                result = ABExcelImporter.advanced_automated_import(self.archive_path, self.db_name, self.if_missing)
                 signals.parameters_changed.emit()
             else:
                 result = ABPackage.import_file(self.archive_path, relink=self.relink, rename=self.db_name)
@@ -889,6 +879,13 @@ class MainWorkerThread(QtCore.QThread):
         except ValueError as e:
             # Relinking of BW2Package strategy has failed.
             import_signals.import_failure.emit(("Relinking failed", e.args[0]))
+
+    def if_missing(self, missing):
+        import_signals.links_required.emit(["implement this"], missing)
+        while not self.signal_return[0]: self.yieldCurrentThread()
+        response = self.signal_return[1]
+        self.signal_return = (False, None)
+        return response
 
     def delete_canceled_db(self):
         if self.db_name in bw.databases:

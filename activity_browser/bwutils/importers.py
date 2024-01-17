@@ -26,15 +26,6 @@ from .strategies import (
     csv_rewrite_product_key,
 )
 
-class Result:
-    def __init__(self, identifier: str, payload):
-        self.identifier = identifier
-        self.payload = payload
-    
-    def set_response(self, response):
-        self.response = response
-
-
 class ABExcelImporter(ExcelImporter):
     """Customized Excel importer for the AB."""
 
@@ -119,7 +110,7 @@ class ABExcelImporter(ExcelImporter):
         return [db]
 
     @classmethod
-    def advanced_automated_import(cls, filepath, db_name: str, relink: dict = None):
+    def advanced_automated_import(cls, filepath, db_name: str, missing_fn):
         obj = cls(filepath)
 
         first_phase_strats = [
@@ -156,11 +147,9 @@ class ABExcelImporter(ExcelImporter):
         obj.apply_strategies(first_phase_strats)
         obj.db_name = db_name
 
-        print(obj.statistics())
-
         # recover exchanges that reference external databases (databases that are not the one we are now importing)
         # group them by database name and keep references to the obj.data dict intact. We want changes to trickle 
-        # down to that dict later instead of having to update them through an interator again.
+        # down to that dict later instead of having to update them through an iterator again.
         external_databases = {}
         for activity in obj.data:
             for exchange in activity.get("exchanges",[]):
@@ -182,13 +171,8 @@ class ABExcelImporter(ExcelImporter):
         # if any of the external databases are not in our current databases, we need to relink
         missing = [ db for db in external_databases.keys() if db not in bw.databases]       
         if missing:
-            # yield Result.identifier = MISSING to the worker, indicating we need user interaction
-            # yield pauses further execution till the worker indicates it has provided a response
-            user_links_result = Result("MISSING", missing)
-            yield user_links_result
-
-            #get the response from the Result and apply the change to our external databases
-            user_links = user_links_result.response[0]
+            #wait for response and apply the change to our external databases
+            user_links = missing_fn(missing)[0]
             for link in user_links:
                 external_databases[user_links[link]] = external_databases.pop(link)
         
@@ -221,7 +205,7 @@ class ABExcelImporter(ExcelImporter):
         db = obj.write_database(delete_existing=True, activate_parameters=True)
         if has_params:
             bw.parameters.recalculate()
-        yield Result("FINISHED", [db])
+        return [db]
 
 class ABPackage(bw.BW2Package):
     """ Inherits from brightway2 `BW2Package` and handles importing BW2Packages.
