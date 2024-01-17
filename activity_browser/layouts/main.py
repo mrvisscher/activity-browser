@@ -34,20 +34,49 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowIcon(self.icon)
 
         # setting-up dockwidgets
+                
+        self.setTabPosition(QtCore.Qt.AllDockWidgetAreas, QtWidgets.QTabWidget.West)
+        self.setDockOptions(self.AllowNestedDocks | self.AllowTabbedDocks )
+
+        databases_widget_bar = WidgetBar("Reference Flows", self)
+        self.databases=QtWidgets.QDockWidget('Databases')
+        self.databases.setWidget(Database_Manager_Panel(self))
+        databases_widget_bar.addDockWidget(self.databases)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, databases_widget_bar)
+
+        ic_widget_bar = WidgetBar("Impact Categories", self)
+        self.ic=QtWidgets.QDockWidget('Impact Categories')
+        self.ic.setWidget(MethodsTab(self.ic))
+        ic_widget_bar.addDockWidget(self.ic)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
+        self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
+
+        parameters_widget_bar = WidgetBar("Parameters", self)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, parameters_widget_bar)
+        self.tabifyDockWidget(databases_widget_bar, parameters_widget_bar)
+
+        scenarios_widget_bar = WidgetBar("Scenarios", self)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, scenarios_widget_bar)
+        self.tabifyDockWidget(databases_widget_bar, scenarios_widget_bar)
+
+        """
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, projects_widget_bar)
+
         self.projects=QtWidgets.QDockWidget('Projects')
         self.projects.setWidget(ProjectsWidget())
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.projects)
+        widget_bar.addDockWidget(self.projects)
 
         self.databases=QtWidgets.QDockWidget('Databases')
         self.databases.setWidget(Database_Manager_Panel(self))
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.databases)
+        widget_bar.addDockWidget(self.databases)
 
         self.impacts=QtWidgets.QDockWidget('Impact Categories')
         self.impacts.setWidget(MethodsTab(self.impacts))
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.impacts)
+        """
 
-        self.setTabPosition(QtCore.Qt.AllDockWidgetAreas, QtWidgets.QTabWidget.North)
-        self.setDockOptions(self.GroupedDragging | self.AllowTabbedDocks )
 
 
         # Debug/... window stack
@@ -66,9 +95,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setMenuBar(self.menu_bar)
 
         self.menu_bar.view_menu.addSeparator()
-        self.menu_bar.view_menu.addAction(self.projects.toggleViewAction())
-        self.menu_bar.view_menu.addAction(self.databases.toggleViewAction())
-        self.menu_bar.view_menu.addAction(self.impacts.toggleViewAction())
+        #self.menu_bar.view_menu.addAction(self.projects.toggleViewAction())
+        #self.menu_bar.view_menu.addAction(self.databases.toggleViewAction())
+        #self.menu_bar.view_menu.addAction(self.impacts.toggleViewAction())
 
         self.status_bar = Statusbar(self)
         self.setStatusBar(self.status_bar)
@@ -87,8 +116,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def toggle_debug_window(self):
         """Toggle the bottom debug window"""
-        self.debug_window = not self.debug_window
-        self.bottom_panel.setVisible(self.debug_window)
+        menubars = self.findChildren(WidgetBar)
+        for bar in menubars:
+            bar.collapse()
 
     def add_tab_to_panel(self, obj, label, side):
         panel = self.left_panel if side == 'left' else self.right_panel
@@ -126,3 +156,41 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def restore_user_control(self):
         QtWidgets.QApplication.restoreOverrideCursor()
+
+class WidgetBar(QtWidgets.QDockWidget):
+    def __init__(self, title: str , parent):
+        super().__init__(title, parent)
+        self.setFeatures(self.NoDockWidgetFeatures)
+
+        # initialize docker
+        self.docker = QtWidgets.QMainWindow()
+        self.docker.setDockOptions(self.docker.AnimatedDocks)
+
+        self.title_bar = QtWidgets.QWidget(self)
+        self.title_bar.setFixedHeight(1)
+        self.title_bar.setMinimumHeight(1)
+
+        self.setWidget(self.docker)
+        self.setTitleBarWidget(self.title_bar)       
+
+        # initialize spacer for in the docker
+        self.spacer = QtWidgets.QWidget(self)
+        self.spacer.setFixedHeight(1)
+
+        self.spacer_title = QtWidgets.QWidget(self)
+        self.spacer_title.setFixedHeight(1)
+
+        spacer_dock = QtWidgets.QDockWidget(self)
+        spacer_dock.setWidget(self.spacer)
+        spacer_dock.setTitleBarWidget(self.spacer_title)
+        self.addDockWidget(spacer_dock)
+      
+    def addDockWidget(self, widget: QtWidgets.QDockWidget):
+        widget.setParent(self)
+        widget.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea)
+        self.docker.addDockWidget(QtCore.Qt.LeftDockWidgetArea, widget)
+    
+    def collapse(self):
+        children = self.findChildren(QtWidgets.QDockWidget)
+        for child in children:
+            child.setHidden(True)
