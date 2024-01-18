@@ -4,7 +4,7 @@ import sys
 import traceback
 
 from PySide2.QtCore import QSysInfo, __version__ as qt_version
-from PySide2.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication, QStyleFactory
 
 from .application import Application
 from .info import __version__
@@ -32,6 +32,7 @@ if QSysInfo.productType() in ["arch","nixos"]:
 
 def run_activity_browser():
     qapp = QApplication(sys.argv)
+    qapp.setStyle(QStyleFactory.create("fusion"))
 
     # qapp.setFont(default_font)
 #    qapp.setStyleSheet(
