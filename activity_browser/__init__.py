@@ -43,6 +43,7 @@ def run_activity_browser():
 #            QWidget>QTableWidget { background-color: #FFFFFF; color: #101010 }
 #        '''
 #    )
+    with open("C:\\Users\\marin\\Programs\\AB\\AB Git\\activity-browser\\activity_browser\\style.qss","r") as fh: qapp.setStyleSheet(fh.read())
 
     application = Application()
     application.show()
