@@ -160,68 +160,75 @@ class WidgetBar(QtWidgets.QDockWidget):
         self.docker.sync_width()
     
 class Docker(QtWidgets.QMainWindow):
+    collapsed = True
+
     def __init__(self, parent):
         super().__init__(None)
         self.setDockOptions(self.AnimatedDocks)
         self.setMinimumSize(1, 1)
 
-        self.spacer = QtWidgets.QWidget(self)
-        self.spacer.setFixedHeight(1)
+        spacer_widget = QtWidgets.QWidget(self)
+        spacer_widget.setFixedHeight(1)
 
-        self.spacer_dw = Dockable("",self)
-        self.spacer_dw.setWidget(self.spacer)
-        self.spacer_dw.setTitleBarWidget(QtWidgets.QWidget())
-        self.spacer_dw.setFixedWidth(1)
+        self.spacer = Dockable("spacer",self)
+        self.spacer.setWidget(spacer_widget)
+        self.spacer.setTitleBarWidget(QtWidgets.QWidget())
+        self.spacer.setFixedWidth(1)
+        self.spacer.setFixedHeight(0)
 
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.spacer_dw)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.spacer)
 
     def addDockWidget(self, area, dock_widget):
         dock_widget.topLevelChanged.connect(lambda x: self.sync_width())
         super().addDockWidget(area, dock_widget)
     
     def grow(self, width):
-        self.spacer_dw.setFixedWidth(width)
+        self.spacer.setFixedWidth(width)
         self.sync_width()
     
     def constrain(self):
-        self.spacer_dw.setFixedWidth(1)
-        #self.spacer.setFixedWidth(1)
+        self.spacer.setFixedWidth(1)
         self.sync_width()
     
     def collapse(self):
+        self.collapsed = True
         children = self.findChildren(Dockable)
         for child in children:
             child.setHidden(True)
         self.sync_width()
     
     def expand(self):
+        self.collapsed = False
         children = self.findChildren(Dockable)
         for child in children:
-            print(f"Expanding {child.windowTitle()}")
             child.setHidden(False)
         self.sync_width()
     
-    def toggle_spacer(self):
+    def sync_spacer(self):
         children = self.findChildren(Dockable)
-        docked = [child for child in children if not child.isFloating()]
-        if len(docked) > 1:
-            print("hiding spacer")
-            self.spacer_dw.setHidden(True)
-            self.spacer_dw.setMinimumWidth(1)
-            self.spacer.setMaximumWidth(500)
-        if len(docked) == 1:
-            print("showing spacer")
-            self.spacer_dw.setHidden(False)
+        docked = [child for child in children if not child.isFloating() and child != self.spacer]
+
+        print(f"Toggling spacer | Docked widgets = {len(docked)}")
+
+        if len(docked) >= 1:
+            self.spacer.setHidden(True)
+        if len(docked) == 0:
+            self.spacer.setHidden(False)
     
     def sync_width(self):
-        self.toggle_spacer()
+        self.sync_spacer()
+
+        if self.collapsed:
+            self.setMinimumWidth(0)
+            self.setMaximumWidth(500)
+            return
+
         children = self.findChildren(Dockable)
         docked = [child for child in children if not child.isFloating() and not child.isHidden()]
         min_width = 0
         max_width = 500
 
         for child in docked:
-            print(f"checking {child.windowTitle()}")
             child_min_width = child.minimumWidth()
             child_max_width = child.maximumWidth()
             if min_width < child_min_width: min_width = child_min_width
@@ -230,8 +237,6 @@ class Docker(QtWidgets.QMainWindow):
         self.setMinimumWidth(min_width)
         self.setMaximumWidth(max_width)
         print(f"Sync width for {self.parent().windowTitle()}: {min_width=} {max_width=}")
-        print(self.minimumWidth())
-        print(self.maximumWidth())
 
 
 class Dockable(QtWidgets.QDockWidget):
