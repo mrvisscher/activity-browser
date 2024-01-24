@@ -39,15 +39,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setDockOptions(self.AllowNestedDocks | self.AllowTabbedDocks )
 
         databases_widget_bar = WidgetBar("Reference Flows", self)
-        self.databases=QtWidgets.QDockWidget('Databases')
-        self.databases.setWidget(Database_Manager_Panel(self))
-        databases_widget_bar.addDockWidget(self.databases)
+        databases_widget_bar.addWidget('Databases', Database_Manager_Panel(self))
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, databases_widget_bar)
 
         ic_widget_bar = WidgetBar("Impact Categories", self)
-        self.ic=QtWidgets.QDockWidget('Impact Categories')
-        self.ic.setWidget(MethodsTab(self.ic))
-        ic_widget_bar.addDockWidget(self.ic)
+        ic_widget_bar.addWidget('Impact Categories', MethodsTab(self))
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
         self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
 
@@ -58,26 +54,6 @@ class MainWindow(QtWidgets.QMainWindow):
         scenarios_widget_bar = WidgetBar("Scenarios", self)
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, scenarios_widget_bar)
         self.tabifyDockWidget(databases_widget_bar, scenarios_widget_bar)
-
-        """
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, projects_widget_bar)
-
-        self.projects=QtWidgets.QDockWidget('Projects')
-        self.projects.setWidget(ProjectsWidget())
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.projects)
-        widget_bar.addDockWidget(self.projects)
-
-        self.databases=QtWidgets.QDockWidget('Databases')
-        self.databases.setWidget(Database_Manager_Panel(self))
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.databases)
-        widget_bar.addDockWidget(self.databases)
-
-        self.impacts=QtWidgets.QDockWidget('Impact Categories')
-        self.impacts.setWidget(MethodsTab(self.impacts))
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.impacts)
-        """
-
-
 
         # Debug/... window stack
         self.debug = QtWidgets.QWidget()
@@ -94,11 +70,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.menu_bar = MenuBar(self)
         self.setMenuBar(self.menu_bar)
 
-        self.menu_bar.view_menu.addSeparator()
-        #self.menu_bar.view_menu.addAction(self.projects.toggleViewAction())
-        #self.menu_bar.view_menu.addAction(self.databases.toggleViewAction())
-        #self.menu_bar.view_menu.addAction(self.impacts.toggleViewAction())
-
         self.status_bar = Statusbar(self)
         self.setStatusBar(self.status_bar)
 
@@ -114,11 +85,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.shortcut_debug.activated.connect(self.toggle_debug_window)
         signals.restore_cursor.connect(self.restore_user_control)
 
+        self.tabifiedDockWidgetActivated.connect(self.dockwidget_sizing)
+
+    def dockwidget_sizing(self, widget: QtWidgets.QDockWidget):
+        area = self.dockWidgetArea(widget)
+        menubars: list[WidgetBar] = self.findChildren(WidgetBar)
+        for bar in menubars:
+            if bar == widget: continue
+            if self.dockWidgetArea(bar) != area: continue
+            bar.docker.collapse()
+        widget.docker.expand()
+
+
     def toggle_debug_window(self):
         """Toggle the bottom debug window"""
         menubars = self.findChildren(WidgetBar)
         for bar in menubars:
-            bar.collapse()
+            bar.docker.collapse()
 
     def add_tab_to_panel(self, obj, label, side):
         panel = self.left_panel if side == 'left' else self.right_panel
@@ -160,37 +143,128 @@ class MainWindow(QtWidgets.QMainWindow):
 class WidgetBar(QtWidgets.QDockWidget):
     def __init__(self, title: str , parent):
         super().__init__(title, parent)
+        # as little stuff as possible
         self.setFeatures(self.NoDockWidgetFeatures)
+        self.setTitleBarWidget(QtWidgets.QWidget())
 
         # initialize docker
-        self.docker = QtWidgets.QMainWindow()
-        self.docker.setDockOptions(self.docker.AnimatedDocks)
+        self.docker = Docker(self)
+        self.setWidget(self.docker)        
+      
+    def addWidget(self, name, widget: QtWidgets.QWidget):
+        """Easy method to put a widget in this docker area"""
+        dock_widget = Dockable(name, self.docker)
+        dock_widget.setWidget(widget)
+        dock_widget.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea)
+        self.docker.addDockWidget(QtCore.Qt.LeftDockWidgetArea, dock_widget)
+        self.docker.sync_width()
+    
+class Docker(QtWidgets.QMainWindow):
+    def __init__(self, parent):
+        super().__init__(None)
+        self.setDockOptions(self.AnimatedDocks)
+        self.setMinimumSize(1, 1)
 
-        self.title_bar = QtWidgets.QWidget(self)
-        self.title_bar.setFixedHeight(1)
-        self.title_bar.setMinimumHeight(1)
-
-        self.setWidget(self.docker)
-        self.setTitleBarWidget(self.title_bar)       
-
-        # initialize spacer for in the docker
         self.spacer = QtWidgets.QWidget(self)
         self.spacer.setFixedHeight(1)
 
-        self.spacer_title = QtWidgets.QWidget(self)
-        self.spacer_title.setFixedHeight(1)
+        self.spacer_dw = Dockable("",self)
+        self.spacer_dw.setWidget(self.spacer)
+        self.spacer_dw.setTitleBarWidget(QtWidgets.QWidget())
+        self.spacer_dw.setFixedWidth(1)
 
-        spacer_dock = QtWidgets.QDockWidget(self)
-        spacer_dock.setWidget(self.spacer)
-        spacer_dock.setTitleBarWidget(self.spacer_title)
-        self.addDockWidget(spacer_dock)
-      
-    def addDockWidget(self, widget: QtWidgets.QDockWidget):
-        widget.setParent(self)
-        widget.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea)
-        self.docker.addDockWidget(QtCore.Qt.LeftDockWidgetArea, widget)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.spacer_dw)
+
+    def addDockWidget(self, area, dock_widget):
+        dock_widget.topLevelChanged.connect(lambda x: self.sync_width())
+        super().addDockWidget(area, dock_widget)
+    
+    def grow(self, width):
+        self.spacer_dw.setFixedWidth(width)
+        self.sync_width()
+    
+    def constrain(self):
+        self.spacer_dw.setFixedWidth(1)
+        #self.spacer.setFixedWidth(1)
+        self.sync_width()
     
     def collapse(self):
-        children = self.findChildren(QtWidgets.QDockWidget)
+        children = self.findChildren(Dockable)
         for child in children:
             child.setHidden(True)
+        self.sync_width()
+    
+    def expand(self):
+        children = self.findChildren(Dockable)
+        for child in children:
+            print(f"Expanding {child.windowTitle()}")
+            child.setHidden(False)
+        self.sync_width()
+    
+    def toggle_spacer(self):
+        children = self.findChildren(Dockable)
+        docked = [child for child in children if not child.isFloating()]
+        if len(docked) > 1:
+            print("hiding spacer")
+            self.spacer_dw.setHidden(True)
+            self.spacer_dw.setMinimumWidth(1)
+            self.spacer.setMaximumWidth(500)
+        if len(docked) == 1:
+            print("showing spacer")
+            self.spacer_dw.setHidden(False)
+    
+    def sync_width(self):
+        self.toggle_spacer()
+        children = self.findChildren(Dockable)
+        docked = [child for child in children if not child.isFloating() and not child.isHidden()]
+        min_width = 0
+        max_width = 500
+
+        for child in docked:
+            print(f"checking {child.windowTitle()}")
+            child_min_width = child.minimumWidth()
+            child_max_width = child.maximumWidth()
+            if min_width < child_min_width: min_width = child_min_width
+            if max_width > child_max_width: max_width = child_max_width
+            
+        self.setMinimumWidth(min_width)
+        self.setMaximumWidth(max_width)
+        print(f"Sync width for {self.parent().windowTitle()}: {min_width=} {max_width=}")
+        print(self.minimumWidth())
+        print(self.maximumWidth())
+
+
+class Dockable(QtWidgets.QDockWidget):
+    dragging = False
+
+    def __init__(self, name, parent):
+        super().__init__(name, parent)
+
+        titlebar = Titlebar(name)
+        self.setTitleBarWidget(titlebar)
+    
+    def event(self, event: QtCore.QEvent):
+        """"Have to listen in on mousebuttonrelease here because of qt bugs"""
+        if self.dragging and event.type() == event.MouseButtonRelease:
+            self.dragging = False
+            self.drop()
+        return super().event(event)
+
+    def drag(self):
+        if not self.isFloating(): return
+        
+        self.dragging = True
+        # bring the right bar to the front
+        self.parent().parent().raise_()
+
+        # resize that bar to fit this widget
+        self.parent().grow(self.width())   
+    
+    def drop(self):
+        self.parent().constrain()
+
+class Titlebar(QtWidgets.QLabel):
+
+    def mouseMoveEvent(self, event: QtGui.QMouseEvent) -> None:
+        self.parent().drag()        
+        return super().mouseMoveEvent(event)
