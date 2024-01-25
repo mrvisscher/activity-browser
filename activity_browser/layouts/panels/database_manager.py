@@ -6,12 +6,12 @@ from ...ui.icons import qicons
 from ...ui.tables import (DatabasesTable)
 from ...signals import signals
 
+from .panel import ABPanel
 from .database import Database_Panel
 
-class Database_Manager_Panel(QtWidgets.QWidget):
-    def __init__(self, parent: QtWidgets.QMainWindow):
-        super().__init__(parent)
-        self.main_window = parent
+class Database_Manager_Panel(ABPanel):
+    def __init__(self):
+        super().__init__("Databases")
         self.table = DatabasesTable()
         self.table.setToolTip("To select a database, double-click on an entry")
 
@@ -65,21 +65,18 @@ class Database_Manager_Panel(QtWidgets.QWidget):
         self.label_change_readonly.setVisible(not no_databases)
     
     def open_or_focus_database(self, db_name: str):
+        docker = self.parent().parent()
 
         # put focus if the database is already open
-        existing_panel: Database_Panel = self.main_window.findChild(Database_Panel, db_name)
+        existing_panel: Database_Panel = docker.findChild(Database_Panel, db_name)
         if existing_panel: return existing_panel.parent().raise_() 
 
-        database_panel = Database_Panel(self.main_window)
+        database_panel = Database_Panel(db_name)
         database_panel.setObjectName(db_name)
         database_panel.table.model.sync(db_name)
 
-        database_dockwidget = QtWidgets.QDockWidget(db_name)
-        database_dockwidget.setWidget(database_panel)
-        database_dockwidget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        database_panel.dock_widget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
-        self.main_window.addDockWidget(QtCore.Qt.LeftDockWidgetArea, database_dockwidget)
-
-        first_relative: QtWidgets.QDockWidget = self.main_window.findChild(QtWidgets.QDockWidget, "database")
-        if first_relative: self.main_window.tabifyDockWidget(first_relative, database_dockwidget)
-        database_dockwidget.setObjectName("database")
+        first_relative: QtWidgets.QDockWidget = docker.findChild(Database_Panel)
+        docker.addDockWidget(QtCore.Qt.LeftDockWidgetArea, database_panel.dock_widget)
+        if first_relative: docker.tabifyDockWidget(first_relative.dock_widget, database_panel.dock_widget)

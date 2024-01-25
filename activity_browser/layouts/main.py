@@ -39,13 +39,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setDockOptions(self.AllowNestedDocks | self.AllowTabbedDocks )
 
         databases_widget_bar = WidgetBar("Reference Flows", self)
-        databases_widget_bar.addWidget('Databases', Database_Manager_Panel(self))
+        databases_widget_bar.addPanel(Database_Manager_Panel())
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, databases_widget_bar)
 
-        ic_widget_bar = WidgetBar("Impact Categories", self)
-        ic_widget_bar.addWidget('Impact Categories', MethodsTab(self))
-        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
-        self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
+        #ic_widget_bar = WidgetBar("Impact Categories", self)
+        #ic_widget_bar.addWidget('Impact Categories', MethodsTab(self))
+        #self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
+        #self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
+
 
         parameters_widget_bar = WidgetBar("Parameters", self)
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, parameters_widget_bar)
@@ -151,10 +152,10 @@ class WidgetBar(QtWidgets.QDockWidget):
         self.docker = Docker(self)
         self.setWidget(self.docker)        
       
-    def addWidget(self, name, widget: QtWidgets.QWidget):
+    def addPanel(self, panel: QtWidgets.QWidget):
         """Easy method to put a widget in this docker area"""
-        dock_widget = Dockable(name, self.docker)
-        dock_widget.setWidget(widget)
+        dock_widget = panel.dock_widget
+
         dock_widget.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea)
         self.docker.addDockWidget(QtCore.Qt.LeftDockWidgetArea, dock_widget)
         self.docker.sync_width()
@@ -164,17 +165,17 @@ class Docker(QtWidgets.QMainWindow):
 
     def __init__(self, parent):
         super().__init__(None)
-        self.setDockOptions(self.AnimatedDocks)
+        self.setTabPosition(QtCore.Qt.AllDockWidgetAreas, QtWidgets.QTabWidget.North)
         self.setMinimumSize(1, 1)
 
         spacer_widget = QtWidgets.QWidget(self)
         spacer_widget.setFixedHeight(1)
 
-        self.spacer = Dockable("spacer",self)
+        self.spacer = QtWidgets.QDockWidget("spacer",self)
         self.spacer.setWidget(spacer_widget)
         self.spacer.setTitleBarWidget(QtWidgets.QWidget())
         self.spacer.setFixedWidth(1)
-        self.spacer.setFixedHeight(0)
+        self.spacer.setFixedHeight(1)
 
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.spacer)
 
@@ -186,34 +187,44 @@ class Docker(QtWidgets.QMainWindow):
         self.spacer.setFixedWidth(width)
         self.sync_width()
     
-    def constrain(self):
-        self.spacer.setFixedWidth(1)
-        self.sync_width()
+    def constrain(self, immediately=False):
+        """"Constrain the bar by setting the width of the spacer"""
+        # immediately set the width of the spacer and sync width
+        if immediately:
+            self.spacer.setFixedWidth(1)
+            self.sync_width()
+        # by default it happens after 100ms to allow for a drop to be processed
+        # if not, a panel cannot be dropped because the width of the bar is set
+        # smaller than the panel itself.
+        else:
+            QtCore.QTimer.singleShot(100, lambda: self.constrain(True))
     
     def collapse(self):
         self.collapsed = True
-        children = self.findChildren(Dockable)
+        children = self.findChildren(QtWidgets.QDockWidget)
         for child in children:
             child.setHidden(True)
         self.sync_width()
     
     def expand(self):
         self.collapsed = False
-        children = self.findChildren(Dockable)
+        children = self.findChildren(QtWidgets.QDockWidget)
         for child in children:
             child.setHidden(False)
         self.sync_width()
     
     def sync_spacer(self):
-        children = self.findChildren(Dockable)
+        children = self.findChildren(QtWidgets.QDockWidget)
         docked = [child for child in children if not child.isFloating() and child != self.spacer]
 
-        print(f"Toggling spacer | Docked widgets = {len(docked)}")
+        #print(f"Toggling spacer | Docked widgets = {len(docked)}")
 
-        if len(docked) >= 1:
-            self.spacer.setHidden(True)
         if len(docked) == 0:
-            self.spacer.setHidden(False)
+            self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.spacer)
+            self.spacer.setHidden(False)  
+        if len(docked) >= 1:
+            self.removeDockWidget(self.spacer)
+          
     
     def sync_width(self):
         self.sync_spacer()
@@ -223,8 +234,9 @@ class Docker(QtWidgets.QMainWindow):
             self.setMaximumWidth(500)
             return
 
-        children = self.findChildren(Dockable)
+        children = self.findChildren(QtWidgets.QDockWidget)
         docked = [child for child in children if not child.isFloating() and not child.isHidden()]
+
         min_width = 0
         max_width = 500
 
@@ -236,40 +248,4 @@ class Docker(QtWidgets.QMainWindow):
             
         self.setMinimumWidth(min_width)
         self.setMaximumWidth(max_width)
-        print(f"Sync width for {self.parent().windowTitle()}: {min_width=} {max_width=}")
-
-
-class Dockable(QtWidgets.QDockWidget):
-    dragging = False
-
-    def __init__(self, name, parent):
-        super().__init__(name, parent)
-
-        titlebar = Titlebar(name)
-        self.setTitleBarWidget(titlebar)
-    
-    def event(self, event: QtCore.QEvent):
-        """"Have to listen in on mousebuttonrelease here because of qt bugs"""
-        if self.dragging and event.type() == event.MouseButtonRelease:
-            self.dragging = False
-            self.drop()
-        return super().event(event)
-
-    def drag(self):
-        if not self.isFloating(): return
-        
-        self.dragging = True
-        # bring the right bar to the front
-        self.parent().parent().raise_()
-
-        # resize that bar to fit this widget
-        self.parent().grow(self.width())   
-    
-    def drop(self):
-        self.parent().constrain()
-
-class Titlebar(QtWidgets.QLabel):
-
-    def mouseMoveEvent(self, event: QtGui.QMouseEvent) -> None:
-        self.parent().drag()        
-        return super().mouseMoveEvent(event)
+        #print(f"Sync width for {self.parent().windowTitle()}: {min_width=} {max_width=}")

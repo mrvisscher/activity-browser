@@ -5,10 +5,11 @@ from ...ui.style import header
 from ...ui.icons import qicons
 from ...ui.tables import (ActivitiesBiosphereTable)
 from ...signals import signals
+from .panel import ABPanel
 
-class Database_Panel(QtWidgets.QWidget):
-    def __init__(self, parent):
-        super().__init__(parent)
+class Database_Panel(ABPanel):
+    def __init__(self, name):
+        super().__init__(name)
         self.table = ActivitiesBiosphereTable(self)
 
         # Header widget

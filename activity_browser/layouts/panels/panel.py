@@ -1,13 +1,60 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtWidgets, QtCore
+from PySide2 import QtWidgets, QtCore, QtGui
 
 from ...signals import signals
+
 
 import logging
 from activity_browser.logger import ABHandler
 
 logger = logging.getLogger('ab_logs')
 log = ABHandler.setup_with_logger(logger, __name__)
+
+
+class ABPanel(QtWidgets.QWidget):
+    def __init__(self, name):
+        super().__init__()
+        self.setMinimumWidth(250)
+
+        self.dock_widget = Dockable(name)
+        self.dock_widget.setWidget(self)
+
+class Dockable(QtWidgets.QDockWidget):
+    dragging = False
+
+    def __init__(self, name):
+        super().__init__(name)
+
+        titlebar = Titlebar(name)
+        self.setTitleBarWidget(titlebar)
+    
+    def event(self, event: QtCore.QEvent):
+        """"Have to listen in on mousebuttonrelease here because of qt bugs"""
+        if self.dragging and event.type() == event.MouseButtonRelease:
+            self.dragging = False
+            self.drop()
+        return super().event(event)
+
+    def drag(self):
+        if not self.isFloating(): return
+        
+        self.dragging = True
+        # bring the right bar to the front throught its dockwidget
+        self.parent().parent().raise_()
+
+        # resize that bar to fit this widget
+        self.parent().grow(self.width())   
+    
+    def drop(self):
+        self.parent().constrain()
+
+class Titlebar(QtWidgets.QLabel):
+
+    def mouseMoveEvent(self, event: QtGui.QMouseEvent) -> None:
+        """Need to reimplement mouseMoveEvent here to catch the titlebar being dragged"""
+        self.parent().drag()        
+        return super().mouseMoveEvent(event)
+
 
 
 class ABTab(QtWidgets.QTabWidget):
