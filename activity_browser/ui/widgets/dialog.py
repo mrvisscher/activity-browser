@@ -534,6 +534,7 @@ class DefaultBiosphereDialog(QtWidgets.QProgressDialog):
     def finished(self, result: int = None) -> None:
         self.biosphere_thread.exit(result or 0)
         self.setValue(3)
+        print(bw.config.sqlite3_databases)
         self.check_patches()
         signals.change_project.emit(bw.projects.current)
         signals.project_selected.emit()
@@ -568,6 +569,13 @@ class DefaultBiosphereThread(QThread):
         if not len(bw.migrations):
             self.update.emit(2, "Creating core data migrations for {}".format(project))
             bw.create_core_migrations()
+        
+
+        # cleaning up the DB connections in this thread
+        for _, db in bw.config.sqlite3_databases:
+            if not db._database.is_closed():
+                db._database.close()
+                print(db._database.is_closed())
 
 
 class FilterManagerDialog(QtWidgets.QDialog):

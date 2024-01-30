@@ -61,3 +61,9 @@ class UpdateBiosphereThread(QtCore.QThread):
         except ValidityError as e:
             log.error(f'Could not patch biosphere: {str(e)}')
             self.exit(1)
+        
+        # cleaning up the DB connections in this thread
+        for _, db in bw.config.sqlite3_databases:
+            if not db._database.is_closed():
+                db._database.close()
+                print(db._database.is_closed())
