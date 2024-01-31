@@ -1,0 +1,1179 @@
+################################ test session 1 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.00s (0:01:03) =========================
+################################ test session 2 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.18s (0:01:03) =========================
+################################ test session 3 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.05s (0:01:02) =========================
+################################ test session 4 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.33s (0:01:02) =========================
+################################ test session 5 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.88s (0:01:02) =========================
+################################ test session 6 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.87s (0:01:02) =========================
+################################ test session 7 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 65.05s (0:01:05) =========================
+################################ test session 8 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.16s (0:01:04) =========================
+################################ test session 9 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.29s (0:01:03) =========================
+############################### test session 10 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.33s (0:01:03) =========================
+############################### test session 11 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.40s (0:01:03) =========================
+############################### test session 12 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.19s (0:01:02) =========================
+############################### test session 13 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.46s (0:01:04) =========================
+############################### test session 14 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.66s (0:01:03) =========================
+############################### test session 15 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.56s (0:01:02) =========================
+############################### test session 16 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.10s (0:01:03) =========================
+############################### test session 17 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.42s (0:01:04) =========================
+############################### test session 18 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.51s (0:01:03) =========================
+############################### test session 19 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.71s (0:01:03) =========================
+############################### test session 20 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.12s (0:01:03) =========================
+############################### test session 21 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.51s (0:01:04) =========================
+############################### test session 22 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.71s (0:01:02) =========================
+############################### test session 23 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.27s (0:01:04) =========================
+############################### test session 24 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.93s (0:01:02) =========================
+############################### test session 25 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.99s (0:01:02) =========================
+############################### test session 26 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.44s (0:01:02) =========================
+############################### test session 27 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py ############################### test session 28 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.76s (0:01:03) =========================
+############################### test session 29 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.87s (0:01:02) =========================
+############################### test session 30 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.89s (0:01:02) =========================
+############################### test session 31 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.33s (0:01:02) =========================
+############################### test session 32 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.53s (0:01:02) =========================
+############################### test session 33 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.99s (0:01:03) =========================
+############################### test session 34 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.76s (0:01:02) =========================
+############################### test session 35 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.89s (0:01:02) =========================
+############################### test session 36 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.28s (0:01:03) =========================
+############################### test session 37 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.15s (0:01:04) =========================
+############################### test session 38 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.73s (0:01:04) =========================
+############################### test session 39 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.66s (0:01:03) =========================
+############################### test session 40 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.79s (0:01:02) =========================
+############################### test session 41 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.83s (0:01:04) =========================
+############################### test session 42 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.59s (0:01:03) =========================
+############################### test session 43 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py ############################### test session 44 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.67s (0:01:02) =========================
+############################### test session 45 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.75s (0:01:03) =========================
+############################### test session 46 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py ############################### test session 47 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.48s (0:01:02) =========================
+############################### test session 48 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.27s (0:01:02) =========================
+############################### test session 49 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.19s (0:01:04) =========================
+############################### test session 50 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.75s (0:01:03) =========================
+############################### test session 51 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.41s (0:01:02) =========================
+############################### test session 52 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.57s (0:01:02) =========================
+############################### test session 53 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.25s (0:01:02) =========================
+############################### test session 54 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.63s (0:01:03) =========================
+############################### test session 55 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.11s (0:01:04) =========================
+############################### test session 56 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.17s (0:01:03) =========================
+############################### test session 57 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.35s (0:01:03) =========================
+############################### test session 58 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.96s (0:01:03) =========================
+############################### test session 59 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.22s (0:01:04) =========================
+############################### test session 60 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.28s (0:01:03) =========================
+############################### test session 61 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py ############################### test session 62 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.91s (0:01:02) =========================
+############################### test session 63 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.90s (0:01:02) =========================
+############################### test session 64 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.18s (0:01:03) =========================
+############################### test session 65 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.56s (0:01:02) =========================
+############################### test session 66 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.04s (0:01:03) =========================
+############################### test session 67 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.79s (0:01:03) =========================
+############################### test session 68 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.16s (0:01:03) =========================
+############################### test session 69 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.53s (0:01:02) =========================
+############################### test session 70 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.74s (0:01:02) =========================
+############################### test session 71 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.46s (0:01:02) =========================
+############################### test session 72 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.67s (0:01:03) =========================
+############################### test session 73 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.02s (0:01:04) =========================
+############################### test session 74 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.87s (0:01:04) =========================
+############################### test session 75 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.82s (0:01:03) =========================
+############################### test session 76 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.61s (0:01:02) =========================
+############################### test session 77 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.74s (0:01:02) =========================
+############################### test session 78 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.55s (0:01:03) =========================
+############################### test session 79 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py ############################### test session 80 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.11s (0:01:03) =========================
+############################### test session 81 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.59s (0:01:03) =========================
+############################### test session 82 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py ############################### test session 83 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.57s (0:01:02) =========================
+############################### test session 84 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py ############################### test session 85 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.51s (0:01:02) =========================
+############################### test session 86 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.96s (0:01:03) =========================
+############################### test session 87 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.57s (0:01:04) =========================
+############################### test session 88 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.56s (0:01:02) =========================
+############################### test session 89 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.64s (0:01:02) =========================
+############################### test session 90 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.99s (0:01:02) =========================
+############################### test session 91 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.57s (0:01:02) =========================
+############################### test session 92 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.62s (0:01:02) =========================
+############################### test session 93 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.79s (0:01:03) =========================
+############################### test session 94 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.41s (0:01:02) =========================
+############################### test session 95 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.10s (0:01:03) =========================
+############################### test session 96 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.77s (0:01:03) =========================
+############################### test session 97 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 62.45s (0:01:02) =========================
+############################### test session 98 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.47s (0:01:03) =========================
+############################### test session 99 ###############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 64.36s (0:01:04) =========================
+############################### test session 100 ##############################
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-7.4.0, pluggy-1.0.0
+PySide2 5.15.8 -- Qt runtime 5.15.8 -- Qt compiled 5.15.8
+rootdir: C:\Users\marin\Programs\AB\AB Git\activity-browser\tests
+configfile: pytest.ini
+plugins: cov-4.1.0, mock-3.10.0, qt-4.3.1, repeat-0.9.2
+collected 1 item
+
+tests\threading_stress_test.py .                                         [100%]
+
+======================== 1 passed in 63.34s (0:01:03) =========================

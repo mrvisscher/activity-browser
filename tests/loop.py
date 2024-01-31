@@ -1,6 +1,6 @@
 import subprocess
 
-number = 2
+number = 100
 output_file_path = "output.txt"
 file = open(output_file_path, 'w')
 

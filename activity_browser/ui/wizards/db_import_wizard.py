@@ -911,6 +911,16 @@ class MainWorkerThread(QtCore.QThread):
         if self.db_name in bw.databases:
             del bw.databases[self.db_name]
             log.info(f'Database {self.db_name} deleted!')
+        # cleaning up the DB connections in this thread
+    
+    def exit(self, code):
+        # cleaning up the DB connections in this thread
+        for _, db in bw.config.sqlite3_databases:
+            if not db._database.is_closed():
+                db._database.close()
+                logger.debug(db._database.is_closed())
+        return super().exit(code)
+
 
 
 class EcoinventLoginPage(QtWidgets.QWizardPage):
