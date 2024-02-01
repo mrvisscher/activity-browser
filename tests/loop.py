@@ -1,6 +1,6 @@
 import subprocess
 
-number = 100
+number = 2
 output_file_path = "output.txt"
 file = open(output_file_path, 'w')
 
@@ -9,7 +9,7 @@ failed = 0
 
 for i in range(1, number + 1):
     file.write(f" test session {i} ".center(79,'#'))
-    completed = subprocess.run("pytest tests\\threading_stress_test.py", stdout=subprocess.PIPE, text=True)
+    completed = subprocess.run("pytest threading_stress_test.py", stdout=subprocess.PIPE, text=True)
     if completed.returncode == 0: success = success + 1
     else: failed = failed + 1
     file.write(completed.stdout)
