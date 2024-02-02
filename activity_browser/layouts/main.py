@@ -80,9 +80,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def debug_action(self):
         """Debug specific action, put code below that you want to test by using the shortcut"""
-        self.dumpObjectTree()
         from activity_browser.ui.widgets.dialog import ABDialog
-        dialog = ABDialog.create_ok_cancel("Are you sure?","Press OK or Cancel")
+        dialog, set_progress = ABDialog.create_progess("Are you sure?","Press OK or Cancel")
+        set_progress(50, 100)
         
         dialog.show()
         return

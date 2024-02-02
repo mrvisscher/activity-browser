@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Callable
 import time
 
 import brightway2 as bw
@@ -91,6 +91,23 @@ class ABDialog(QtWidgets.QDialog):
         dialog.layout.addWidget(button)
 
         return dialog
+    
+    @classmethod
+    def create_progess(cls, title: str, message: str) -> Tuple[QtWidgets.QDialog, Callable[[int, int], None]]:
+        """"
+        Create a simple progress dialog, returns the dialog and a function with which to 
+        set the progressbar value and maximum.
+        """
+        dialog = cls()
+
+        head = ABDialogHead(title, message, dialog)
+
+        bar = ABDialogProgressBar(dialog)
+
+        dialog.layout.addWidget(head)
+        dialog.layout.addWidget(bar)
+
+        return dialog, bar.set_progess
 
 class ABDialogHead(QtWidgets.QFrame):
     def __init__(self, title:str, text:str, parent=None):
@@ -175,7 +192,36 @@ class ABDialogButtons(QtWidgets.QFrame):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(10)
         self.setLayout(layout)
-    
+
+class ABDialogProgressBar(QtWidgets.QFrame):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        layout = QtWidgets.QHBoxLayout()
+
+        self.bar = QtWidgets.QProgressBar(self)
+        self.bar.setRange(0,0)
+        self.bar.setAlignment(Qt.AlignHCenter)
+        layout.addWidget(self.bar)
+
+        self.setLayout(layout)
+
+        self.shadow = QtWidgets.QGraphicsDropShadowEffect(self.parent())
+        self.shadow.setBlurRadius(40)
+        self.setGraphicsEffect(self.shadow)
+
+        self.setStyleSheet("""
+        ABDialogProgressBar {
+            margin-top: 10px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px 15px;
+        }
+        """)
+
+    def set_progess(self, value: int, maximum: int = None):
+        self.bar.setValue(value)
+        if maximum: self.bar.setMaximum(maximum)
+
 class ForceInputDialog(QtWidgets.QDialog):
     """ Due to QInputDialog not allowing 'ok' button to be disabled when
     nothing is entered, we have this.
