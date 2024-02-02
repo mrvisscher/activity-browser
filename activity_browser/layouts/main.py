@@ -25,6 +25,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Window title
         self.setWindowTitle("Activity Browser")
+        self.setObjectName("MainWindow")
 
         # Small icon in main window titlebar
         self.icon = qicons.ab
@@ -73,7 +74,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def connect_signals(self):
         # Keyboard shortcuts
+        debug_action = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+D"), self)
+        debug_action.activated.connect(self.debug_action)
         signals.restore_cursor.connect(self.restore_user_control)
+
+    def debug_action(self):
+        """Debug specific action, put code below that you want to test by using the shortcut"""
+        self.dumpObjectTree()
+        from activity_browser.ui.widgets.dialog import ABDialog
+        dialog = ABDialog.create_ok_cancel("Are you sure?","Press OK or Cancel")
+        
+        dialog.show()
+        return
 
     def add_tab_to_panel(self, obj, label, side):
         panel = self.left_panel if side == 'left' else self.right_panel

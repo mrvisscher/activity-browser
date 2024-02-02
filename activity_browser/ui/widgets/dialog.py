@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
 from typing import List, Tuple
+import time
 
 import brightway2 as bw
 from PySide2 import QtGui, QtWidgets
-from PySide2.QtCore import Qt, Signal, Slot
+from PySide2.QtCore import Qt, Signal, Slot, QEventLoop
 
 from activity_browser.bwutils.superstructure import get_sheet_names
 from activity_browser.settings import project_settings
@@ -17,6 +18,164 @@ from ...info import __ei_versions__
 from ...bwutils.ecoinvent_biosphere_versions.ecospold2biosphereimporter import create_default_biosphere3
 from ...utils import sort_semantic_versions
 
+class ABDialog(QtWidgets.QDialog):
+    def __init__(self):
+        main_window = [widget for widget in QtWidgets.QApplication.topLevelWidgets() if widget.objectName()=="MainWindow"][0]
+        flags = Qt.FramelessWindowHint
+        super().__init__(main_window, flags)
+
+        self.setAttribute(Qt.WA_TranslucentBackground)
+
+        self.setModal(True)
+        self.setFixedWidth(500)
+
+        self.layout = QtWidgets.QVBoxLayout()
+
+        self.layout.setContentsMargins(50, 50, 50, 50)
+        self.layout.setSpacing(0)
+
+        self.setLayout(self.layout)
+
+    
+    # reimplemented QDialog methods
+    def show(self):
+        event_dispatch = self.thread().eventDispatcher()
+
+        self.parent().status_bar.hide()
+        event_dispatch.processEvents(QEventLoop.AllEvents)
+
+        self.blur = QtWidgets.QGraphicsBlurEffect(self)
+        self.blur.setBlurRadius(10)
+        self.blur.setBlurHints(self.blur.PerformanceHint)
+
+        self.parent().setGraphicsEffect(self.blur)
+        super().show()
+    
+    def done(self, status):
+        self.blur.setEnabled(False)
+        del self.blur
+        self.parent().status_bar.show()
+        super().done(status)
+
+    @classmethod
+    def create_ok_cancel(cls, title: str, message: str) -> QtWidgets.QDialog:
+        dialog = cls()
+
+        head = ABDialogHead(title, message, dialog)
+
+        ok_button = QtWidgets.QPushButton("Ok")
+        ok_button.clicked.connect(dialog.accept)
+
+        cancel_button = QtWidgets.QPushButton("Cancel")
+        cancel_button.clicked.connect(dialog.reject)
+
+        buttons = ABDialogButtons([ok_button, cancel_button], dialog)
+        
+        dialog.layout.addWidget(head)
+        dialog.layout.addWidget(buttons)
+
+        return dialog
+    
+    @classmethod
+    def create_ok(cls, title: str, message: str) -> QtWidgets.QDialog:
+        dialog = cls()
+
+        head = ABDialogHead(title, message, dialog)
+
+        ok_button = QtWidgets.QPushButton("Ok")
+        ok_button.clicked.connect(dialog.accept)
+
+        button = ABDialogButtons([ok_button], dialog)
+        
+        dialog.layout.addWidget(head)
+        dialog.layout.addWidget(button)
+
+        return dialog
+
+class ABDialogHead(QtWidgets.QFrame):
+    def __init__(self, title:str, text:str, parent=None):
+        super().__init__(parent)
+
+        self.title = QtWidgets.QLabel(title)
+        self.title.setObjectName("dialog-title")
+
+        self.text = QtWidgets.QLabel(text)
+        self.text.setObjectName("dialog-text")
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(self.title)
+        layout.addWidget(self.text)
+        self.setLayout(layout)
+
+        self.shadow = QtWidgets.QGraphicsDropShadowEffect(self.parent())
+        self.shadow.setBlurRadius(40)
+        self.setGraphicsEffect(self.shadow)
+
+        self.setStyleSheet("""
+        ABDialogHead {
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 0px;
+        }
+        
+        QLabel#dialog-title {
+            font-size: 12pt;
+            font-weight: bold;
+        }
+
+        """)
+
+class ABDialogButtons(QtWidgets.QFrame):
+    def __init__(self, buttons: list[QtWidgets.QPushButton], parent=None):
+        super().__init__(parent)
+
+        self.setStyleSheet("""
+        ABDialogButtons {
+            margin-top: 1em;
+        }
+                                
+        QPushButton {
+            background-color: white;
+            padding: 0.5em 0.1em;
+            border: 1px solid lightgrey;
+            margin: 0px;
+            border-radius: 7px;
+        }
+        
+        QPushButton:focus {
+            background-color: blue;
+            color: white;
+            border: 1px solid lightgrey;
+        }
+
+        QPushButton:hover {
+            background-color: lightgrey;
+            color: black;
+            border: 1px solid lightgrey;
+        }
+
+        QPushButton::pressed {
+            color: lightgrey;
+        }
+
+        QPushButton::disabled {
+            color: rgb(0, 0, 0, 110);
+            background-color: rgb(0, 0, 0, 13);
+            border: 1px solid rgb(0, 0, 0, 5);
+        }
+
+        """)
+
+        layout = QtWidgets.QHBoxLayout()
+        for button in buttons:
+            button.setSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
+            layout.addWidget(button)
+        
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(10)
+        self.setLayout(layout)
+    
 class ForceInputDialog(QtWidgets.QDialog):
     """ Due to QInputDialog not allowing 'ok' button to be disabled when
     nothing is entered, we have this.
