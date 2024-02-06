@@ -75,6 +75,13 @@ class MainWindow(QtWidgets.QMainWindow):
         # Keyboard shortcuts
         signals.restore_cursor.connect(self.restore_user_control)
 
+        self.shortcut_debug = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+D"), self)
+        self.shortcut_debug.activated.connect(self.debug_action)
+
+    def debug_action(self):
+        print(self.dumpObjectTree())
+        return
+
     def add_tab_to_panel(self, obj, label, side):
         panel = self.left_panel if side == 'left' else self.right_panel
         panel.add_tab(obj, label)
