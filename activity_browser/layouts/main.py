@@ -11,7 +11,7 @@ from ..ui.menu_bar import MenuBar
 from ..ui.statusbar import Statusbar
 from ..ui.style import header
 from ..ui.utils import StdRedirector
-from .panels import LeftPanel, RightPanel, BottomPanel, Database_Manager_Panel 
+from .panels import RightPanel, Database_Manager_Panel , Impact_Categories_Panel
 from .tabs.project_manager import ProjectsWidget
 from .tabs import MethodsTab
 from ..signals import signals
@@ -42,10 +42,10 @@ class MainWindow(QtWidgets.QMainWindow):
         databases_widget_bar.addPanel(Database_Manager_Panel())
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, databases_widget_bar)
 
-        # ic_widget_bar = WidgetBar("Impact Categories", self)
-        # ic_widget_bar.addPanel(MethodsTab(self))
-        # self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
-        # self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
+        ic_widget_bar = WidgetBar("Impact Categories", self)
+        ic_widget_bar.addPanel(Impact_Categories_Panel())
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
+        self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
 
 
         parameters_widget_bar = WidgetBar("Parameters", self)

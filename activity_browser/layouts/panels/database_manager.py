@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from PySide2 import QtCore, QtWidgets
 
-from ...ui.style import header
 from ...ui.icons import qicons
-from ...ui.tables import (DatabasesTable)
+from ...ui.tables import DatabasesTable
 from ...signals import signals
 
 from .panel import ABPanel
 from .database import Database_Panel
+
 
 class Database_Manager_Panel(ABPanel):
     def __init__(self):
