@@ -42,10 +42,10 @@ class MainWindow(QtWidgets.QMainWindow):
         databases_widget_bar.addPanel(Database_Manager_Panel())
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, databases_widget_bar)
 
-        #ic_widget_bar = WidgetBar("Impact Categories", self)
-        #ic_widget_bar.addWidget('Impact Categories', MethodsTab(self))
-        #self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
-        #self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
+        # ic_widget_bar = WidgetBar("Impact Categories", self)
+        # ic_widget_bar.addPanel(MethodsTab(self))
+        # self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, ic_widget_bar)
+        # self.tabifyDockWidget(databases_widget_bar, ic_widget_bar)
 
 
         parameters_widget_bar = WidgetBar("Parameters", self)
@@ -181,6 +181,7 @@ class Docker(QtWidgets.QMainWindow):
 
     def addDockWidget(self, area, dock_widget):
         dock_widget.topLevelChanged.connect(lambda x: self.sync_width())
+        dock_widget.destroyed.connect(self.sync_width)
         super().addDockWidget(area, dock_widget)
     
     def grow(self, width):

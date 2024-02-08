@@ -67,16 +67,22 @@ class Database_Manager_Panel(ABPanel):
     def open_or_focus_database(self, db_name: str):
         docker = self.parent().parent()
 
-        # put focus if the database is already open
+        # put focus if the database is already open and return
         existing_panel: Database_Panel = docker.findChild(Database_Panel, db_name)
         if existing_panel: return existing_panel.parent().raise_() 
 
+        # initialize a new database panel
         database_panel = Database_Panel(db_name)
         database_panel.setObjectName(db_name)
         database_panel.table.model.sync(db_name)
-
         database_panel.dock_widget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
+        # check if there is already a database panel open
         first_relative: QtWidgets.QDockWidget = docker.findChild(Database_Panel)
+
+        # add the dockwidget and combine with a possible existing panel
         docker.addDockWidget(QtCore.Qt.LeftDockWidgetArea, database_panel.dock_widget)
         if first_relative: docker.tabifyDockWidget(first_relative.dock_widget, database_panel.dock_widget)
+
+        # put the panel on top
+        database_panel.parent().raise_()
