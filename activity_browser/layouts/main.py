@@ -86,7 +86,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.shortcut_debug.activated.connect(self.toggle_debug_window)
         signals.restore_cursor.connect(self.restore_user_control)
 
-        self.tabifiedDockWidgetActivated.connect(self.dockwidget_sizing)
+        #self.tabifiedDockWidgetActivated.connect(self.dockwidget_sizing)
 
     def dockwidget_sizing(self, widget: QtWidgets.QDockWidget):
         area = self.dockWidgetArea(widget)
@@ -165,55 +165,33 @@ class Docker(QtWidgets.QMainWindow):
 
     def __init__(self, parent):
         super().__init__(None)
+        self.spacer = self.generate_spacer()
+
         self.setTabPosition(QtCore.Qt.AllDockWidgetAreas, QtWidgets.QTabWidget.North)
         self.setMinimumSize(1, 1)
 
-        spacer_widget = QtWidgets.QWidget(self)
-        spacer_widget.setFixedHeight(1)
-
-        self.spacer = QtWidgets.QDockWidget("spacer",self)
-        self.spacer.setWidget(spacer_widget)
-        self.spacer.setTitleBarWidget(QtWidgets.QWidget())
-        self.spacer.setFixedWidth(1)
-        self.spacer.setFixedHeight(1)
+        self.setMinimumWidth(200)
+        self.setMaximumWidth(400)
 
         self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.spacer)
+        self.sync_spacer()
+    
+    def generate_spacer(self):
+        spacer_widget = QtWidgets.QWidget()
+        spacer_widget.setFixedHeight(1)
+
+        spacer = QtWidgets.QDockWidget("spacer", self)
+        spacer.setWidget(spacer_widget)
+        spacer.setTitleBarWidget(QtWidgets.QWidget())
+        spacer.setFixedHeight(1)
+        return spacer
 
     def addDockWidget(self, area, dock_widget):
-        dock_widget.topLevelChanged.connect(lambda x: self.sync_width())
-        dock_widget.destroyed.connect(self.sync_width)
+        dock_widget.topLevelChanged.connect(lambda x: self.sync_spacer())
+        dock_widget.destroyed.connect(self.sync_spacer)
         super().addDockWidget(area, dock_widget)
-    
-    def grow(self, width):
-        self.spacer.setFixedWidth(width)
-        self.sync_width()
-    
-    def constrain(self, immediately=False):
-        """"Constrain the bar by setting the width of the spacer"""
-        # immediately set the width of the spacer and sync width
-        if immediately:
-            self.spacer.setFixedWidth(1)
-            self.sync_width()
-        # by default it happens after 100ms to allow for a drop to be processed
-        # if not, a panel cannot be dropped because the width of the bar is set
-        # smaller than the panel itself.
-        else:
-            QtCore.QTimer.singleShot(100, lambda: self.constrain(True))
-    
-    def collapse(self):
-        self.collapsed = True
-        children = self.findChildren(QtWidgets.QDockWidget)
-        for child in children:
-            child.setHidden(True)
-        self.sync_width()
-    
-    def expand(self):
-        self.collapsed = False
-        children = self.findChildren(QtWidgets.QDockWidget)
-        for child in children:
-            child.setHidden(False)
-        self.sync_width()
-    
+        self.sync_spacer()
+         
     def sync_spacer(self):
         children = self.findChildren(QtWidgets.QDockWidget)
         docked = [child for child in children if not child.isFloating() and child != self.spacer]
@@ -221,13 +199,23 @@ class Docker(QtWidgets.QMainWindow):
         #print(f"Toggling spacer | Docked widgets = {len(docked)}")
 
         if len(docked) == 0:
-            self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.spacer)
-            self.spacer.setHidden(False)  
+            print("adding spacer")
+            self.spacer.setHidden(False)
+            self.setDockOptions(self.AnimatedDocks)
         if len(docked) >= 1:
-            self.removeDockWidget(self.spacer)
+            print("removing spacer")
+            #self.removeDockWidget(self.spacer)
+            self.spacer.setHidden(True)
+            self.setDockOptions(self.AnimatedDocks | self.AllowTabbedDocks)
           
     
     def sync_width(self):
+        return
+        children = self.findChildren(QtWidgets.QDockWidget)
+        docked = [child for child in children if not child.isFloating() and not child.isHidden()]
+
+
+        
         self.sync_spacer()
 
         if self.collapsed:

@@ -29,6 +29,9 @@ class Database_Manager_Panel(ABPanel):
         self.new_database_action = QtWidgets.QAction("New database", self)
         self.import_database_action = QtWidgets.QAction("Import database", self)
 
+        self.setMinimumHeight(200)
+        self.setMaximumHeight(300)
+
         self._construct_layout()
         self._connect_signals()
 

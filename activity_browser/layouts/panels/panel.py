@@ -14,7 +14,8 @@ log = ABHandler.setup_with_logger(logger, __name__)
 class ABPanel(QtWidgets.QWidget):
     def __init__(self, name):
         super().__init__()
-        self.setMinimumWidth(250)
+        self.setMinimumWidth(200)
+        self.setMaximumWidth(400)
 
         self.dock_widget = Dockable(name)
         self.dock_widget.setWidget(self)
@@ -27,6 +28,7 @@ class Dockable(QtWidgets.QDockWidget):
 
         titlebar = Titlebar(name)
         self.setTitleBarWidget(titlebar)
+        self.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea)
     
     def event(self, event: QtCore.QEvent):
         """"Have to listen in on mousebuttonrelease here because of qt bugs"""
@@ -39,14 +41,15 @@ class Dockable(QtWidgets.QDockWidget):
         if not self.isFloating(): return
         
         self.dragging = True
+
         # bring the right bar to the front throught its dockwidget
         self.parent().parent().raise_()
 
-        # resize that bar to fit this widget
-        self.parent().grow(self.width())   
     
     def drop(self):
-        self.parent().constrain()
+        return
+
+        
 
 class Titlebar(QtWidgets.QLabel):
 
