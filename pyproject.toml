@@ -39,7 +39,7 @@ dependencies = [
     "pandas>=2.2.1",
     "pint<=0.21",
     "pyperclip",
-    "pyside2>=5.15.5",
+    "pyside2",
     "salib>=1.4",
     "seaborn",
 ]
